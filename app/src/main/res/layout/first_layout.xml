@@ -6,16 +6,26 @@
         android:id="@+id/button_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button 1"/>
+        android:text="测试按钮"/>
     <Button
         android:id="@+id/exit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button Exit"/>
+        android:text="退出程序"/>
     <Button
         android:id="@+id/start_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start Activity"/>
+        android:text="活动跳转"/>
+    <Button
+        android:id="@+id/open_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打开百度"/>
+    <Button
+        android:id="@+id/add_near_friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加附近人"/>
 
 </LinearLayout>
