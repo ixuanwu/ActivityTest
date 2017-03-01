@@ -1,5 +1,6 @@
 package com.merckor.activitytest;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class FirstActivity extends AppCompatActivity {
+public class FirstActivity extends AppCompatActivity implements TipViewController.ViewDismissHandler{
 
     private static final String TAG = "FirstActivity";
+    private TipViewController mTipViewController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class FirstActivity extends AppCompatActivity {
         buttonClickStartActivity();
         buttonClickOpenUrl();
         buttonAddNearFriend();
+        buttonOpenFloatWindow();
     }
 
     private void buttonClickTest(){
@@ -32,7 +35,23 @@ public class FirstActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-            Toast.makeText(FirstActivity.this,"You Clicked Button 1",Toast.LENGTH_SHORT).show();
+                Toast.makeText(FirstActivity.this,"You Clicked Button 1",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void buttonOpenFloatWindow(){
+        Button btn = (Button)findViewById(R.id.open_float_window);
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if (mTipViewController != null) {
+                    mTipViewController.updateContent("fuck");
+                } else {
+                    mTipViewController = new TipViewController(getApplication(), "fuck123");
+                    mTipViewController.setViewDismissHandler(FirstActivity.this);
+                    mTipViewController.show();
+                }
             }
         });
     }
@@ -116,5 +135,17 @@ public class FirstActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    public static void startForContent(Context context, String content) {
+        Intent intent = new Intent(context, FirstActivity.class);
+        intent.putExtra("content", content);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void onViewDismiss() {
+        mTipViewController = null;
     }
 }
