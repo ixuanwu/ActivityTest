@@ -27,15 +27,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="添加附近人"/>
+
     <Button
         android:id="@+id/open_float_window"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="打开悬浮窗"/>
+
     <Button
         android:id="@+id/open_float_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="打开悬浮按钮"/>
+    <EditText
+        android:id="@+id/log_content_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test"/>
+    <Button
+        android:id="@+id/set_log_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="设置日志"/>
 
 </LinearLayout>

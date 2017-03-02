@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class FirstActivity extends AppCompatActivity implements TipViewController.ViewDismissHandler{
@@ -28,6 +29,7 @@ public class FirstActivity extends AppCompatActivity implements TipViewControlle
         buttonClickOpenUrl();
         buttonAddNearFriend();
         buttonOpenFloatWindow();
+        buttonSetLogContent();
     }
 
     private void buttonClickTest(){
@@ -40,18 +42,31 @@ public class FirstActivity extends AppCompatActivity implements TipViewControlle
         });
     }
 
+    private void buttonSetLogContent(){
+        Button setLogBtn = (Button)findViewById(R.id.set_log_content);
+        setLogBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                EditText logContentText = (EditText)findViewById(R.id.log_content_edit);
+                String logContent       = logContentText.getText().toString();
+                LogCatFloatView.showLogCat(logContent);
+            }
+        });
+    }
+
     private void buttonOpenFloatWindow(){
         Button btn = (Button)findViewById(R.id.open_float_window);
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if (mTipViewController != null) {
-                    mTipViewController.updateContent("fuck");
-                } else {
-                    mTipViewController = new TipViewController(getApplication(), "fuck123");
-                    mTipViewController.setViewDismissHandler(FirstActivity.this);
-                    mTipViewController.show();
-                }
+//                if (mTipViewController != null) {
+//                    mTipViewController.updateContent("fuck");
+//                } else {
+//                    mTipViewController = new TipViewController(getApplication(), "fuck123");
+//                    mTipViewController.setViewDismissHandler(FirstActivity.this);
+//                    mTipViewController.show();
+//                }
+                showFloatView();
             }
         });
     }
@@ -147,5 +162,12 @@ public class FirstActivity extends AppCompatActivity implements TipViewControlle
     @Override
     public void onViewDismiss() {
         mTipViewController = null;
+    }
+
+    /**
+     * 显示悬浮窗
+     */
+    private void showFloatView() {
+       LogCatFloatView.getInstance().showFloatView(getApplication(), R.layout.layout_float_window);
     }
 }
